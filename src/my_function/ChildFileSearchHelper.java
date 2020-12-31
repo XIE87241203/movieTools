@@ -17,7 +17,7 @@ public class ChildFileSearchHelper extends BaseFunction {
 
     @Override
     public void startFunction() {
-        new Thread(this::startInputData).start();
+        startInputData();
     }
 
     private void startInputData() {
@@ -48,11 +48,11 @@ public class ChildFileSearchHelper extends BaseFunction {
         boolean exitSearch = false;
         while (!exitSearch) {
             String input = MyUtils.getInputPath("请输入搜索文件名(留空为结束搜索):").toUpperCase();
-            if (MyUtils.isEmpty(input)) {
+            if (MyUtils.isStrEmpty(input)) {
                 exitSearch = true;
             } else {
                 String path = dirNamePathMap.get(input);
-                if (!MyUtils.isEmpty(path)) {
+                if (!MyUtils.isStrEmpty(path)) {
                     MyUtils.systemLog("查找结果:\n" + path);
                 } else {
                     MyUtils.systemLog("无匹配结果。");

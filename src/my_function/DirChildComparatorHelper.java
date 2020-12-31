@@ -16,7 +16,7 @@ public class DirChildComparatorHelper extends BaseFunction {
 
     @Override
     public void startFunction() {
-        new Thread(this::startCompare).start();
+        startCompare();
     }
 
     private void startCompare() {
@@ -55,7 +55,7 @@ public class DirChildComparatorHelper extends BaseFunction {
                 log.append(str).append("\n\n");
             }
             String logPath = MyUtils.getInputPath("请输入日志输出路径(留空为当前目录)：");
-            MyUtils.writeLog("Dir_Compare", logPath, log.toString());
+            MyUtils.writeLog("Dir_Compare_Log", logPath, log.toString());
         }
     }
 }

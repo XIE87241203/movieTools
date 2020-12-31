@@ -27,7 +27,7 @@ public class MyUtils {
      * @param str 字符串
      * @return 是否为null或空字符串
      */
-    public static boolean isEmpty(String str) {
+    public static boolean isStrEmpty(String str) {
         return str == null || str.equals("");
     }
 
@@ -49,6 +49,9 @@ public class MyUtils {
         System.out.println("");
     }
 
+    public static void systemLogError(String content){
+        System.out.println("错误" + content);
+    }
     /**
      * 输出日志到txt
      * @param prefix 日志名前缀
@@ -85,7 +88,7 @@ public class MyUtils {
         Scanner sc = new Scanner(System.in);
         scanPath = sc.nextLine();
 
-        if (MyUtils.isEmpty(scanPath)) {
+        if (MyUtils.isStrEmpty(scanPath)) {
             scanPath = new File("").getPath();
         }
         return scanPath;

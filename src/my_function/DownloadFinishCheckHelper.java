@@ -63,14 +63,13 @@ public class DownloadFinishCheckHelper extends BaseFunction {
                                 Paths.get(targetDir.getPath() + File.separator + item.getName()), StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        MyUtils.systemLog("移动文件夹 \"" + item.getName() + "\" 失败");
+                        MyUtils.systemLogError("移动文件夹 \"" + item.getName() + "\" 失败");
                     }
                 } else {
                     MyUtils.systemLog("(" + (i + 1) + "/" + fileList.size() + ") " + "文件 \"" + item.getName() + "\" 未下载完成.");
                 }
             }
         }
-        MyUtils.systemLog("任务完成！");
     }
 
     /**
