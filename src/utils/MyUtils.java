@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import com.sun.istack.internal.Nullable;
 
@@ -6,10 +6,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 public class MyUtils {
+    public final static List<String> VIDEO_SUFFIX = Arrays.asList(".ASF", ".AVI", ".WM", ".WMP", ".WMV"
+            , ".RAM", ".RM", ".RMVB", ".RP", ".RPM", ".RT", ".SMIL", ".SCM"
+            , ".DAT", ".M1V", ".M2V", ".M2P", ".M2TS", ".MP2V", ".MPE", ".MPEG", ".MPEG1", ".MPEG2", ".MPG", ".MPV2", ".PSS", ".TP", ".TPR", ".TS"
+            , ".M4B", ".M4R", ".M4P", ".M4V", ".MP4", ".MPEG4"
+            , ".3G2", ".3GP", ".3GP2", ".3GPP"
+            , ".MOV", ".QT"
+            , ".FLV", ".F4V", ".SWF", ".HLV"
+            , ".IFO", ".VOB"
+            , ".AMV", ".CSF", ".DIVX", ".EVO", ".MKV", ".MOD", ".PMP", ".VP6", ".BIK", ".MTS", ".XLMV", ".OGM", ".OGV", ".OGX");
+
+    public final static List<String> DOWNLOADING_SUFFIX = Arrays.asList(".BC!", ".XLTD");
 
     /**
      * 字符串判空
@@ -60,5 +70,34 @@ public class MyUtils {
                 }
             }
         }
+    }
+
+    public static String getInputPath(String tips){
+        String scanPath = "";
+        //读取路径
+        MyUtils.systemLog(tips);
+        Scanner sc = new Scanner(System.in);
+        scanPath = sc.nextLine();
+
+        if (MyUtils.isEmpty(scanPath)) {
+            scanPath = new File("").getPath();
+        }
+        return scanPath;
+    }
+
+
+    /**
+     * 获取文件后缀
+     *
+     * @param file 文件
+     * @return 文件后缀
+     */
+    public static String getSuffix(File file) {
+        String suffix = "";
+        int lastIndexOf = file.getName().lastIndexOf(".");
+        if (lastIndexOf != -1) {
+            suffix = file.getName().substring(lastIndexOf);
+        }
+        return suffix;
     }
 }
