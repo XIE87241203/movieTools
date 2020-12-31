@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FileSearchCheckHelper extends BaseFunction {
+public class ChildFileSearchHelper extends BaseFunction {
     private HashMap<String, String> dirNamePathMap;
 
-    public FileSearchCheckHelper() {
+    public ChildFileSearchHelper() {
         super("查找目录下一级文件和文件夹", "查找目录下的一级文件和文件夹是否存在。");
     }
 
@@ -39,27 +39,7 @@ public class FileSearchCheckHelper extends BaseFunction {
             }
         }
         //获取文件夹名列表数据
-        dirNamePathMap = new HashMap<>();
-        for (String path : scanPaths) {
-            File scanFile = new File(path);
-            File[] listFiles = scanFile.listFiles();
-            if (listFiles != null) {
-                for (File fileItem : listFiles) {
-                    String fileName = fileItem.getName().toUpperCase();
-                    if (!fileItem.isDirectory()) {
-                        //去除后缀
-                        fileName = fileName.substring(0, fileName.length() - MyUtils.getSuffix(fileItem).length());
-                    }
-                    String lastPath = dirNamePathMap.get(fileName);
-                    if (lastPath == null) {
-                        lastPath = fileItem.getPath();
-                    } else {
-                        lastPath = lastPath + "\n" + fileItem.getPath();
-                    }
-                    dirNamePathMap.put(fileName, lastPath);
-                }
-            }
-        }
+        dirNamePathMap = getChildNamePathMap(scanPaths);
         MyUtils.systemLog("读取目录文件夹成功");
         startSearch();
     }
@@ -80,4 +60,36 @@ public class FileSearchCheckHelper extends BaseFunction {
             }
         }
     }
+
+
+    /**
+     * 获取输入目录的子文件名和路径
+     * @param scanPaths 输入目录
+     * @return 子文件名和路径
+     */
+    public static HashMap<String, String> getChildNamePathMap(List<String> scanPaths){
+        HashMap<String,String> result = new HashMap<>();
+        for (String path : scanPaths) {
+            File scanFile = new File(path);
+            File[] listFiles = scanFile.listFiles();
+            if (listFiles != null) {
+                for (File fileItem : listFiles) {
+                    String fileName = fileItem.getName().toUpperCase();
+                    if (!fileItem.isDirectory()) {
+                        //去除后缀
+                        fileName = fileName.substring(0, fileName.length() - MyUtils.getSuffix(fileItem).length());
+                    }
+                    String lastPath = result.get(fileName);
+                    if (lastPath == null) {
+                        lastPath = fileItem.getPath();
+                    } else {
+                        lastPath = lastPath + "\n" + fileItem.getPath();
+                    }
+                    result.put(fileName, lastPath);
+                }
+            }
+        }
+        return result;
+    }
+
 }

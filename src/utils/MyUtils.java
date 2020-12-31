@@ -49,6 +49,12 @@ public class MyUtils {
         System.out.println("");
     }
 
+    /**
+     * 输出日志到txt
+     * @param prefix 日志名前缀
+     * @param dirPath 日志路径
+     * @param content 日志内容
+     */
     public static void writeLog(@Nullable String prefix, String dirPath, String content) {
         if (prefix == null) prefix = "";
         FileWriter fileWriter = null;

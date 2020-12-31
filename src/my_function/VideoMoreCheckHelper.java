@@ -31,7 +31,7 @@ public class VideoMoreCheckHelper extends BaseFunction {
             for (String item : result) {
                 scanLog.append(item).append("\n");
             }
-            MyUtils.writeLog("ScanLog", scanPath, scanLog.toString());
+            MyUtils.writeLog("Video_More_Check", scanPath, scanLog.toString());
         }
     }
 
