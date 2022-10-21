@@ -103,10 +103,24 @@ public class MyUtils {
      */
     public static String getSuffix(File file) {
         String suffix = "";
-        int lastIndexOf = file.getName().lastIndexOf(".");
-        if (lastIndexOf != -1) {
-            suffix = file.getName().substring(lastIndexOf);
+        if(!file.isDirectory()){
+           suffix = getSuffix(file.getName());
         }
         return suffix;
+    }
+
+    public static String getSuffix(String file) {
+        String suffix = "";
+        int lastIndexOf = file.lastIndexOf(".");
+        if (lastIndexOf != -1) {
+            suffix = file.substring(lastIndexOf);
+        }
+        return suffix;
+    }
+
+    public static boolean isVideo(File file){
+        //获取文件后缀
+        String suffix = MyUtils.getSuffix(file).toUpperCase();
+        return MyUtils.VIDEO_SUFFIX.contains(suffix);
     }
 }

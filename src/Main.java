@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         new Thread(() -> {
             BaseFunction[] functionMenu = new BaseFunction[]{new VideoMoreCheckHelper(), new DownloadFinishCheckHelper()
-                    , new ChildFileSearchHelper(), new DirChildComparatorHelper(), new VideoRenameHelper()};
+                    , new ChildFileSearchHelper(), new DirChildComparatorHelper(), new VideoRenameHelper(), new ExtractVideoFilesHelper()};
             MyUtils.systemLog("请选择功能：");
             for (int i = 0; i < functionMenu.length; i++) {
                 MyUtils.systemLog((i + 1) + "、" + functionMenu[i].getFunctionDesc());
@@ -24,7 +24,6 @@ public class Main {
             functionMenu[functionIndex - 1].startFunction();
             MyUtils.systemLog("任务完成！");
         }).start();
-        // TODO: 2020/12/31 根据目录名重命名视频文件
     }
 
 
